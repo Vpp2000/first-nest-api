@@ -13,6 +13,12 @@ export class CarsController {
 
   @Get(':id')
   public getCarById(@Param('id', ParseIntPipe) id: number) {
-    return this.carService.getCarById(id);
+    const car = this.carService.getCarById(id);
+
+    if (car == null) {
+      throw new Error('Car not found');
+    }
+
+    return car;
   }
 }
